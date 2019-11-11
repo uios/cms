@@ -1,0 +1,28 @@
+<link async rel="stylesheet" href="/cdn/css/login.css" media="all">
+<container class="overflow-x">
+    <document style="padding:10px;">
+        <form id="login" class="login" onsubmit="event.preventDefault(); auth.login(byId('username').value,byId('password').value);">
+            <div class="lgn-user">
+                <div class="user-ico" style="background-image: url('https://cdn.mallzones.com/file/mzncdn/asset/svg/profile.svg');"></div>
+                <input type="text" id="username" placeholder="E-mail">
+                <input class="absolute" id="rememberme" name="rememberme" value="remember" style="display: none;top:0;right:0;margin:8px;width:20px;height:20px;" type="checkbox">
+            </div>
+            <div class="lgn-pass">
+                <div class="pass-ico" style="background-image: url('https://cdn.mallzones.com/file/mzncdn/asset/svg/password.svg');"></div>
+                <input autocomplete type="password" id="password" placeholder="Password">
+                <icon class="absolute bkgctn inline" style="display:none;width: 36px; height: 36px; right: 0; background-size: 18px;"></icon>
+            </div>
+            <input type="submit" id="log" class="log in" data-id="" value="Sign In">
+            <div class="center inline sign-up" onclick="eruda.init()">Sign Up</div>
+            <!--auth.register(byId('username').value,byId('password').value)-->
+        </form> 
+        <div class="center" data-evt="social-login">
+            <div class="signin mz inline" onclick="'/home/'.router();"></div>
+            <div class="signin fb" onclick="auth.state('facebook')"></div>
+            <div class="signin gg" onclick="auth.state('google')"></div>
+            <div class="signin gh" onclick="auth.state('github')"></div>
+            <div class="signin ms" onclick="auth.state('microsoft')"></div>
+            <div class="signin tt" onclick="auth.state('twitter')"></div>
+        </div>
+    </document>
+</container>
