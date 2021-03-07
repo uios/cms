@@ -19,3 +19,7 @@ main {width: calc(100% - 240px);background: #f1f1f1;}
 [data-page="/pages/"] aside .tab[data-href="/pages/"]:before,
 [data-page="/theme/"] aside .tab[data-href="/theme/"]:before
 { content: ''; display: block; width: 5px; height: 100%; position: absolute; background: #777; }
+
+/*POSTS*/
+.page[data-page="/posts/"] { padding: 20px; }
+.page[data-page="/posts/"] > header .title { font-size: 24px; }
