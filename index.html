@@ -1,0 +1,101 @@
+<html>
+    <head>
+        <title>CMS</title>
+    </head>
+    <body class="body" id="body">
+        
+        <boot data-path="/" id="boot"></boot>
+
+        <aside class="body-aside" id="body-aside">
+            <div class="tab" data-href="/"><span class="icon"><div></div></span><span class="name">Dashboard</span></div>
+            <div class="tab" data-href="/posts/"><span class="icon"><div></div></span><span class="name">Post</span></div>
+            <div class="tab" data-href="/media/"><span class="icon"><div></div></span><span class="name">Media</span></div>
+            <div class="tab" data-href="/pages/"><span class="icon"><div></div></span><span class="name">Pages</span></div>
+            <div class="tab" data-href="/theme/"><span class="icon"><div></div></span><span class="name">Theme</span></div>
+        </aside>
+
+        <main class="body-main" id="body-main">
+            <div class="page" data-page="/"></div>
+            <div class="page" data-page="/post/"></div>
+            <div class="page" data-page="/media/"></div>
+            <div class="page" data-page="/appearance/"></div>
+            <div class="page" data-page="/pages/"></div>
+        </main>
+
+        <input id="file" type="file">
+
+        <template id="page-index">
+        </template>
+        <template id="page-post">
+        </template>
+        <template id="page-media">            
+        </template>
+
+        <script id="init">
+          var full = window.location.host; // subdomain.domain.com
+          var parts = full.split('.');
+          var sub = parts[0];
+          link = document.createElement('link');
+
+          var myDynamicManifest = {
+            "name": "Content Management System",
+            "short_name": "cms",
+            "description": "Manage your content.",
+            "start_url": "/",
+            "background_color": "#000000",
+            "theme_color": "#0f4a73"
+          }
+          const stringManifest = JSON.stringify(myDynamicManifest);
+          const blob = new Blob([stringManifest], {type: 'application/json'});
+          const manifestURL = URL.createObjectURL(blob);
+
+          link.href = manifestURL;
+          link.rel = 'manifest';
+          document.getElementsByTagName('head')[0].appendChild(link);
+
+			loadScript([
+			  {link: "/index.css"},
+			  {link: "/cdn/css/ui.css"}
+			]);
+			loadjs([
+			  {link: "/index.js"},
+			  {link: "/cdn/js/m.v.js"},
+			  {link: "/cdn/js/on.js"},
+			  {link: "https://cdn.jsdelivr.net/gh/thebanon/jpurey@master/jpurey.js"},
+			  {link: "https://cdn.jsdelivr.net/gh/thebanon/router.js@main/index.js"},
+			  {link: "https://cdn.jsdelivr.net/gh/thebanon/db.js@main/index.js"}
+			]);
+      		function loadScript(links) { //console.log({links});
+      		  var f = 0; do {
+      			var link = ``; 
+      			link += (links[f].link.includes('https:') ? `` : (window.location.protocol === "file:" ? `.` : ``));
+      			link += links[f].link;
+      			console.log(link,links[f].link.includes('https:'));
+      			var sync = links[f].sync ? links[f].sync : ``;
+      		  var script = ``;
+      			if(link.includes('.css')) {
+      			  script = `<link rel="stylesheet" href="`+link+`" `+sync+`>`;
+      			}
+      			if(link.includes('.js')) {
+      			  script = `<script src="`+link+`" `+sync+`>`+atob('PC9zY3JpcHQ+');
+      			}
+      		  document.head.insertAdjacentHTML('beforeend',script);
+      		  f++; } while(f < links.length); //console.log(script);
+      		}
+      		function loadjs(links) {
+      		  var f = 0; do {
+      			var script = document.createElement("script");
+      			var link = ``; 
+      			link += (links[f].link.includes('https:') ? `` : (window.location.protocol === "file:" ? `.` : ``));
+      			link += links[f].link;
+      			console.log(link,links[f].link.includes('https:'));
+      			script.type = "text/javascript";
+      			script.src = link;
+      			//script.onload = (e) => console.log(e.path[0].src,"Script is ready!");
+      			document.head.appendChild(script);
+      		  f++; } while(f < links.length); //console.log(script);
+      		  //document.head.insertAdjacentHTML('beforeend',script);
+      		 }
+  		    </script>
+    </body>
+</html>
