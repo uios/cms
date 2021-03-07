@@ -22,9 +22,9 @@ window.on['touch']["tap"] = async(ev,t,target=ev.target,type=t?t:'tap') => {
 
     var elem = target.closest('[data-file]');
     if(elem) {
-        dom.file.dataset.target = elem.dataset.file;
-        elem.dataset.accept ? dom.file.accept = elem.dataset.accept : null;
-        dom.file.click();
+        var input = byId(elem.dataset.input);
+        elem.dataset.accept ? input.accept = elem.dataset.accept : null;
+        input.click();
     }
 
     var ev = target.closest("[data-evt]");
@@ -50,51 +50,38 @@ window.on['touch']["tap"] = async(ev,t,target=ev.target,type=t?t:'tap') => {
 };
 
 window.on["focus"] = {
-    in: {
-    },
-    out: {
-    }
+    in: { },
+    out: { }
 };
 
 window.on["change"] = {
 
-    file: (event) => {
+    file: (event,s) => {
 
         var target = event.target;
         var evt = target && target.dataset && target.dataset.target ? target.dataset.target : null;
-
         var FR = new FileReader(); console.log(event,target);
 
         if(evt) {
             var files = target.files;
-
             if(files.length > 0) {
               if(files.length === 1) {
                   var reader = FR;
                   var file = files[0];
-                  console.log({file});
                   reader.readAsDataURL(file);
-                  reader.onload = () => onLoad(reader.result,file.type);
-                  reader.onloadstart = () => { console.log(); };
-                  reader.onprogress = onProgress;
-                  reader.onabort = onAbort;
-                  reader.onerror = () => console.log(reader.error);
+                  s.onload ? reader.onload = () => s.onload : null;
+                  s.onloadstart ? reader.onloadstart = s.onloadstart : null;
+                  s.onprogress ? reader.onprogress = s.onprogress : null;
+                  s.onabort ? reader.onabort = s.onabort : null;
+                  s.onerror ? reader.onerror = s.onerror : null;
+                  function onProgress(e) {
+                      if (e.lengthComputable) {
+                          var percentLoaded = Math.round((e.loaded / e.total) * 100);
+                          if(percentLoaded < 100) { console.log(percentLoaded); }
+                      }
+                  }
               }
             }
-            function onLoad(file,type) { console.log({file,type});
-              var container = viewport().find('.player');
-            }
-            function onAbort(e) {
-            }
-            function onProgress(e) {
-              console.log({e});
-              if (e.lengthComputable) {
-                  var percentLoaded = Math.round((e.loaded / e.total) * 100);
-                  if(percentLoaded < 100) { console.log(percentLoaded); }
-              }
-            }
-
-
             
         }
 
@@ -103,15 +90,8 @@ window.on["change"] = {
 };
 
 window.on["key"] = {
-
-    down: {
-
-    },
-
-    up: {
-
-    }
-
+    down: { },
+    up: { }
 };
 
 window.on["submit"] = {

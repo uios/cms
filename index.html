@@ -4,11 +4,11 @@
     </head>
     <body class="body" id="body">
         
-        <boot data-path="/" id="boot"></boot>
+        <boot data-href="/" id="boot"></boot>
 
         <aside class="body-aside" id="body-aside">
             <div class="tab" data-href="/"><span class="icon"><div></div></span><span class="name">Dashboard</span></div>
-            <div class="tab" data-href="/posts/"><span class="icon"><div></div></span><span class="name">Post</span></div>
+            <div class="tab" data-href="/posts/"><span class="icon"><div></div></span><span class="name">Posts</span></div>
             <div class="tab" data-href="/media/"><span class="icon"><div></div></span><span class="name">Media</span></div>
             <div class="tab" data-href="/pages/"><span class="icon"><div></div></span><span class="name">Pages</span></div>
             <div class="tab" data-href="/theme/"><span class="icon"><div></div></span><span class="name">Theme</span></div>
@@ -16,19 +16,77 @@
 
         <main class="body-main" id="body-main">
             <div class="page" data-page="/"></div>
-            <div class="page" data-page="/post/"></div>
+            <div class="page" data-page="/posts/"></div>
             <div class="page" data-page="/media/"></div>
-            <div class="page" data-page="/appearance/"></div>
+            <div class="page" data-page="/theme/"></div>
             <div class="page" data-page="/pages/"></div>
         </main>
 
         <input id="file" type="file">
 
-        <template id="page-index">
+        <template data-href="/" id="page-index">
+            <header>
+                <section><span>Dashboard</span><span><div class=""></div></span></section>
+            </header>
+            <section>
+                <div></div>
+                <div></div>
+            </section>
+            <footer>
+                <div></div>
+            </footer>
         </template>
-        <template id="page-post">
+
+        <template data-href="/media/" id="page-media">
+            <header>
+                <section><span>Media</span><span><div class=""></div></span></section>
+            </header>
+            <section>
+                <div></div>
+                <div></div>
+            </section>
+            <footer>
+                <div></div>
+            </footer>
         </template>
-        <template id="page-media">            
+        
+        <template data-href="/pages/" id="page-pages">
+            <header>
+                <section><span>Pages</span><span><div class=""></div></span></section>
+            </header>
+            <section>
+                <div></div>
+                <div></div>
+            </section>
+            <footer>
+                <div></div>
+            </footer>
+        </template>
+
+        <template data-href="/posts/" id="page-posts">
+            <header>
+                <section><span>Posts</span><span><div class=""></div></span></section>
+            </header>
+            <section>
+                <div></div>
+                <div></div>
+            </section>
+            <footer>
+                <div></div>
+            </footer>
+        </template>
+        
+        <template data-href="/theme/" id="page-theme">
+            <header>
+                <section><span>Theme</span><span><div class=""></div></span></section>
+            </header>
+            <section>
+                <div></div>
+                <div></div>
+            </section>
+            <footer>
+                <div></div>
+            </footer>
         </template>
 
         <script id="init">
@@ -62,7 +120,7 @@
 			  {link: "/cdn/js/m.v.js"},
 			  {link: "/cdn/js/on.js"},
 			  {link: "https://cdn.jsdelivr.net/gh/thebanon/jpurey@master/jpurey.js"},
-			  {link: "https://cdn.jsdelivr.net/gh/thebanon/router.js@main/index.js"},
+			  {link: "https://cdn.jsdelivr.net/gh/thebanon/router.js@master/index.js"},
 			  {link: "https://cdn.jsdelivr.net/gh/thebanon/db.js@main/index.js"}
 			]);
       		function loadScript(links) { //console.log({links});

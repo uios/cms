@@ -67,7 +67,7 @@ function init(path) {
       if(window.location.hash) {
         window.location.hash.split('#')[1].router();
       } else {
-        byId('boot').dataset.path.router();
+        byId('boot').dataset.href.router();
       }
     } else {
       window.location.pathname.router();
